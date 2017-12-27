@@ -1,4 +1,4 @@
-import * as BooksAPI from '../utils/BooksAPI'
+import BooksAPI from '../utils/BooksAPI'
 
 export const ALL = 'ALL'
 export const GET_DETAIL = 'GET_DETAIL'
@@ -9,14 +9,7 @@ export function allSuccess( books ) {
 }
 
 export function fetchAll() {
-  return dispatch => {
-    BooksAPI
-      .getAll()
-      .then( ( books ) => {
-        dispatch( allSuccess( books ) );
-      } )
-      .catch( error => {
-        throw( error );
-      } );
-  };
+  return BooksAPI.getAll().then(data => {
+    return data
+  });
 }

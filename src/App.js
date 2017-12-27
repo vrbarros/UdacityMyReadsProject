@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux'
 import './App.css'
 import Search from './search/Search'
 import Shelf from './shelf/Shelf'
-import fetchAll from './shelf/actions'
+import * as shelfActions from './shelf/actions'
 
 class BooksApp extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchAll();
+    
   }
 
   render() {
@@ -24,14 +24,4 @@ class BooksApp extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {shelf: state.shelf}
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    fetchAll: fetchAll
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(BooksApp)
+export default BooksApp
