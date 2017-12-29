@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import ShelfItem from '../shelf/ShelfItem'
+import { Link } from 'react-router-dom'
 
 class Search extends Component {
   constructor(props) {
@@ -12,13 +13,13 @@ class Search extends Component {
 
   }
   onInputChange(event) {
-    
+
   }
   render() {
 
     return (<div className="search-books">
       <div className="search-books-bar">
-        <a className="close-search" href="/" >Close</a>
+        <Link to="/" className="close-search">Close</Link>
         <div className="search-books-input-wrapper">
           {/*
               NOTES: The search from BooksAPI is limited to a particular set of search terms.

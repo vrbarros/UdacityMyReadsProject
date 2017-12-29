@@ -1,14 +1,15 @@
 import * as types from './actions'
 
-const initialState = {
-  books: [],
-}
-
-export default function shelf(state = initialState.books, action) {
-  switch(action.type) {
+function shelf( state = {}, action ) {
+  switch ( action.type ) {
     case types.ALL:
-      return action.books
+      // Return console message
+      console.log( 'Get all books from API' );
+      // Load the shelf with all books from API
+      return action.shelf;
     default:
-      return state
+      return state;
   }
 }
+
+export default shelf;

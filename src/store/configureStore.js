@@ -1,12 +1,17 @@
-import {createStore, applyMiddleware, combineReducers} from 'redux'
-import shelf from '../shelf/reducers'
-import thunk from 'redux-thunk'
+import { createStore, applyMiddleware, combineReducers, compose, } from 'redux';
+import thunk from 'redux-thunk';
 
-const rootReducer = combineReducers( { shelf } )
+// Import reducers to be combined
+import shelf from '../shelf/reducers';
+import search from '../search/reducers';
 
-export default function configureStore() {
-  return createStore(
-    rootReducer,
-    applyMiddleware(thunk)
-  );
-}
+// Activate ReduxDevTools enhance
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+// Combine reducers
+const rootReducer = combineReducers( { shelf, search } );
+
+// Create store with all enhancement
+const configureStore = createStore( rootReducer, composeEnhancers( applyMiddleware( thunk ) ) );
+
+export default configureStore;
