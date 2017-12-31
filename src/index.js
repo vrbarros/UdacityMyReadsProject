@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import '../node_modules/font-awesome/css/font-awesome.css';
-import { Provider } from 'react-redux';
-import configureStore from './store/configureStore';
+import {Provider} from 'react-redux';
+import configureStore, {history} from './store/configureStore';
+import {ConnectedRouter} from 'react-router-redux';
 
 const store = configureStore;
 
 ReactDOM.render(<Provider store={store}>
-  <BrowserRouter><App/></BrowserRouter>
+  <ConnectedRouter history={history}><App/></ConnectedRouter>
 </Provider>, document.getElementById('root'));

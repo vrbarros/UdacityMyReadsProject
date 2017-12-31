@@ -1,5 +1,6 @@
 import React from 'react'
-import {Route} from 'react-router-dom'
+import {Route, Switch} from 'react-router'
+import { withRouter } from 'react-router-dom'
 import './App.css'
 
 // redux
@@ -14,13 +15,17 @@ import * as shelfActions from './shelf/actions'
 import Search from './search/Search'
 import Shelf from './shelf/Shelf'
 
+const ConnectedSwitch = connect(state => ({location: state.location}))(Switch)
+
 class BooksApp extends React.Component {
   componentDidMount() {}
 
   render() {
     return (<div className="app">
-      <Route path='/' exact={true} render={() => (<Shelf key='shelf' {...this.props}/>)}/>
-      <Route path='/search' exact={true} render={() => (<Search key='search' {...this.props}/>)}/>
+      <ConnectedSwitch>
+        <Route path='/' exact render={() => (<Shelf key='shelf' {...this.props}/>)}/>
+        <Route path='/search' exact render={() => (<Search key='search' {...this.props}/>)}/>
+      </ConnectedSwitch>
     </div>)
   }
 }
@@ -39,4 +44,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 // Connect redux feature
-export default connect(mapStateToProps, mapDispatchToProps)(BooksApp)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BooksApp))

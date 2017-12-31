@@ -21,7 +21,7 @@ class ShelfItem extends Component {
             height: 193,
             backgroundImage: `url(${book.imageLinks.smallThumbnail})`
           }}></div>
-        <div className="book-shelf-changer">
+        <div className="book-shelf-changer" key={index}>
           <select>
             <option value="none" disabled="disabled">Move to...</option>
             <option value="currentlyReading">Currently Reading</option>

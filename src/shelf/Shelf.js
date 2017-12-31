@@ -26,7 +26,7 @@ class Shelf extends Component {
   }
   componentDidMount() {
     // Get all books and update store
-    this.props.getAllBooks(this);
+    this.props.fetchAllBooks(this);
   }
   separateByCategories(book, category) {
     // Check if book shelf is the same of category id
@@ -54,7 +54,7 @@ class Shelf extends Component {
                       state.loading === false
                         ? (shelf.books.map((book, b) => ((
                           self.separateByCategories(book, cat) === true
-                          ? (<li key={book.id}><ShelfItem index={b} book={book} {...this.props}/></li>)
+                          ? (<li key={book.id}><ShelfItem index={b} book={book} /></li>)
                           : false))))
                         : <ReactLoading key={cat.id} type='cubes' color='#000000' delay={0} height='50px' width='50px'/>
                     }

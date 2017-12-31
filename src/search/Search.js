@@ -1,16 +1,10 @@
-import React, {Component} from 'react'
-import ShelfItem from '../shelf/ShelfItem'
-import { Link } from 'react-router-dom'
+import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 class Search extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      search: '',
-      current: this.props.search,
-    };
-
+  state = {
+    // Set the other states reducers
+    loading: true
   }
   onInputChange(event) {
 
@@ -37,7 +31,7 @@ class Search extends Component {
       <div className="search-books-results">
         <ol className="books-grid">
           <li>
-            <ShelfItem />
+
           </li>
         </ol>
       </div>

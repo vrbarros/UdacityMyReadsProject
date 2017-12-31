@@ -5,18 +5,18 @@ export const GET_DETAIL = 'GET_DETAIL';
 export const UPDATE_BOOK = 'UPDATE_BOOK';
 
 export function allBooks( shelf ) {
-  return { type: ALL, shelf };
+  return { type: ALL, shelf, };
 };
 
 export function getDetail( book ) {
-  return { type: GET_DETAIL, book, };
+  return { type: GET_DETAIL, book };
 };
 
 export function updateBook( book, shelf ) {
-  return { type: UPDATE_BOOK, book, shelf };
+  return { type: UPDATE_BOOK, book, shelf, };
 };
 
-export function getAllBooks( page ) {
+export function fetchAllBooks( page ) {
   return function ( dispatch ) {
     BooksAPI
       .getAll()
