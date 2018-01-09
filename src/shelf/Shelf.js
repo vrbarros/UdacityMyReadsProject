@@ -17,16 +17,14 @@ class Shelf extends Component {
         category: 'Want to Read',
         id: 'wantToRead'
       }, {
-        category: 'None',
+        category: 'Remove from shelf...',
         id: 'none'
       }
     ],
-    // Set the other states reducers
-    loading: true
   }
   componentDidMount() {
     // Get all books and update store
-    this.props.fetchAllBooks(this);
+    this.props.fetchAllBooks();
   }
   separateByCategories(book, category) {
     // Check if book shelf is the same of category id
@@ -51,7 +49,7 @@ class Shelf extends Component {
                 <div className="bookshelf-books">
                   <ol className="books-grid">
                     {
-                      state.loading === false
+                      shelf.books
                         ? (shelf.books.map((book, b) => ((
                           self.separateByCategories(book, cat) === true
                           ? (<li key={book.id}><ShelfItem index={b} book={book} /></li>)

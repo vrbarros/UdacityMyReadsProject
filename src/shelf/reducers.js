@@ -3,12 +3,22 @@ import * as types from './actions'
 function shelf( state = {}, action ) {
   switch ( action.type ) {
     case types.ALL:
-      // Return console message
-      console.log( 'Get all books from API' );
       // Load the shelf with all books from API
       return action.shelf;
+    case types.UPDATE_BOOK:
+      // Send the update command
+      // Build the book object
+      var book = action.book;
+      book.shelf = action.shelf;
+      // Set the var to check if exists
+      var index = null;
+      // If not, add the books
+      return {
+        ...state
+      }
+
     default:
-      return state;
+      return [...state];
   }
 }
 

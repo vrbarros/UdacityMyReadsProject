@@ -1,15 +1,58 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
+import ShelfItem from '../shelf/ShelfItem';
+import {Link, withRouter} from 'react-router-dom';
+import ReactLoading from 'react-loading';
+
+// redux
+import {connect} from 'react-redux'
 
 class Search extends Component {
-  state = {
-    // Set the other states reducers
-    loading: true
+  constructor(props) {
+    super(props);
+
+    this.onInputChange = this
+      .onInputChange
+      .bind(this);
+  };
+  componentWillMount() {
+    // Set the timer var
+    this.timer = null;
+  };
+  componentDidMount() {
+    // Get all books to guarantee to correct loading
+    this.props.fetchAllBooks();
   }
   onInputChange(event) {
+    clearTimeout(this.timer);
+
+    // Show the loading
+    this.show = false;
+
+    // Get the query from input field
+    const query = event.target.value;
+    const {fetchSearch} = this.props;
+
+    // To avoid server spam, waits before do search
+    this.timer = setTimeout(function() {
+      // Send message to console
+      console.log("Search now...")
+      // Only do search if value if diff from empty
+      if (query.length > 0) {
+        fetchSearch(query)
+      }
+    }, 750);
 
   }
   render() {
+    const {query, results} = this.props.search;
+    var show = false;
+
+    // Check if there is any value typed
+    if (query.length > 0) {
+      if (results.length > 0) {
+        show = true;
+      }
+    }
 
     return (<div className="search-books">
       <div className="search-books-bar">
@@ -24,19 +67,26 @@ class Search extends Component {
               you don't find a specific author or title. Every search is limited by search terms.
             */
           }
-          <input type="text" placeholder="Search by title or author"/>
+          <input type="text" placeholder="Search by title or author" onChange={this.onInputChange}/>
 
         </div>
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
-          <li>
-
-          </li>
+          {
+            show
+              ? results.map((book, i) => (<li key={book.id}><ShelfItem book={book} index={i}/></li>))
+              : <ReactLoading type='cubes' color='#000000' delay={0} height='50px' width='50px'/>
+          }
         </ol>
       </div>
     </div>)
   }
 }
 
-export default Search
+// Replicate all states to props
+function mapStateToProps(state) {
+  return {search: state.search}
+}
+
+export default withRouter(connect(mapStateToProps)(Search))
