@@ -18,8 +18,6 @@ import Shelf from './shelf/Shelf'
 const ConnectedSwitch = connect(state => ({location: state.location}))(Switch)
 
 class BooksApp extends React.Component {
-  componentDidMount() {}
-
   render() {
     return (<div className="app">
       <ConnectedSwitch>
