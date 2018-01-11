@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ShelfItem from '../shelf/ShelfItem';
 import {Link, withRouter} from 'react-router-dom';
 import ReactLoading from 'react-loading';
+import {Debounce} from 'react-throttle';
 
 // redux
 import {connect} from 'react-redux'
@@ -20,7 +21,9 @@ class Search extends Component {
   };
   componentDidMount() {
     // Get all books to guarantee to correct loading
-    this.props.fetchAllBooks();
+    this
+      .props
+      .fetchAllBooks();
   }
   onInputChange(event) {
     clearTimeout(this.timer);
@@ -67,7 +70,9 @@ class Search extends Component {
               you don't find a specific author or title. Every search is limited by search terms.
             */
           }
-          <input type="text" placeholder="Search by title or author" onChange={this.onInputChange}/>
+          <Debounce time="400" handler="onChange">
+            <input type="text" placeholder="Search by title or author" onChange={this.onInputChange}/>
+          </Debounce>
 
         </div>
       </div>
