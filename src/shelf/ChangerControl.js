@@ -18,9 +18,6 @@ class ChangerControl extends Component {
       .changeShelf
       .bind(this);
   };
-  componentDidMount() {
-    console.log(this.props)
-  }
   changeShelf(book, shelf) {
     // Run the update command API
     this

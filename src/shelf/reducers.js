@@ -10,8 +10,6 @@ function shelf( state = {}, action ) {
       // Build the book object
       var book = action.book;
       book.shelf = action.shelf;
-      // Set the var to check if exists
-      var index = null;
       // If not, add the books
       return {
         ...state

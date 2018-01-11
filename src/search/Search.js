@@ -15,10 +15,6 @@ class Search extends Component {
       .onInputChange
       .bind(this);
   };
-  componentWillMount() {
-    // Set the timer var
-    this.timer = null;
-  };
   componentDidMount() {
     // Get all books to guarantee to correct loading
     this
@@ -26,25 +22,17 @@ class Search extends Component {
       .fetchAllBooks();
   }
   onInputChange(event) {
-    clearTimeout(this.timer);
-
     // Show the loading
     this.show = false;
-
     // Get the query from input field
     const query = event.target.value;
     const {fetchSearch} = this.props;
-
-    // To avoid server spam, waits before do search
-    this.timer = setTimeout(function() {
-      // Send message to console
-      console.log("Search now...")
-      // Only do search if value if diff from empty
-      if (query.length > 0) {
-        fetchSearch(query)
-      }
-    }, 750);
-
+    // Send message to console
+    console.log("Search now...")
+    // Only do search if value if diff from empty
+    if (query.length > 0) {
+      fetchSearch(query)
+    }
   }
   render() {
     const {query, results} = this.props.search;
