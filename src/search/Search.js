@@ -65,13 +65,18 @@ class Search extends Component {
         </div>
       </div>
       <div className="search-books-results">
-        <ol className="books-grid">
-          {
-            show
-              ? results.map((book, i) => (<li key={book.id}><ShelfItem book={book} index={i}/></li>))
-              : <ReactLoading type='cubes' color='#000000' delay={0} height='50px' width='50px'/>
-          }
-        </ol>
+
+        {
+          show
+            ? (<div>
+              <h2 style={{textAlign: 'center'}}>Search returned {results.length} books...</h2>
+              <ol className="books-grid">
+                {results.map((book, i) => (<li key={book.id}><ShelfItem book={book} index={i}/></li>))}
+              </ol>
+            </div>)
+            : (<ol className="books-grid"><ReactLoading type='cubes' color='#000000' delay={0} height='50px' width='50px'/></ol>)
+        }
+
       </div>
     </div>)
   }

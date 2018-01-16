@@ -9,7 +9,7 @@ import {bindActionCreators} from 'redux'
 
 class ChangerControl extends Component {
   static propTypes = {
-    book: PropTypes.object.isRequired
+    book: PropTypes.object.isRequired,
   }
   constructor(props) {
     super(props);
@@ -24,22 +24,27 @@ class ChangerControl extends Component {
       .props
       .fetchUpdateBook(book, shelf)
   }
+
   render() {
     const {book} = this.props;
 
-    var shelf;
+    var setShelf;
 
     // Check if there is a shelf value to set
+    // Only valid on Shelf component
     if (book.shelf) {
       // If exist, set the shelf with the value
-      shelf = book.shelf;
+      setShelf = book.shelf;
     } else {
-
-      shelf = 'none';
+      // If not, set shelf none
+      setShelf = 'none';
     }
 
+    // Run
+
     return (<div className="book-shelf-changer">
-      <select defaultValue={shelf} onChange={(event) => this.changeShelf(book, event.target.value)}>
+    { console.log( this.props.shelf )}
+      <select defaultValue={setShelf} onChange={(event) => this.changeShelf(book, event.target.value)}>
         <option disabled="disabled">Move to...</option>
         <option value="currentlyReading">Currently Reading</option>
         <option value="wantToRead">Want to Read</option>
