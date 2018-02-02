@@ -61,7 +61,7 @@ class Search extends Component {
           {isLoading ? (false) : (
             <h2 style={{
               textAlign: 'center'
-            }}>Search returned { results ? (results.length) : (0) } books... and you have { books ? (books.length) : (0) } different books in the shelf!</h2>
+            }}>Search returned { results ? (results.length) : ("...") } books. You already have { books ? (books.length) : (0) } different books in the shelf!</h2>
           )}
           <ol className="books-grid">
             {isLoading ? (<ReactLoading type='cubes' color='#000000' delay={0} height='50px' width='50px' />) : ( 

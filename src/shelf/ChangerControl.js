@@ -32,6 +32,7 @@ class ChangerControl extends Component {
       if (item.id === book.id) {
         shelf = item.shelf;
       }
+      return false
     })
     // If exist, return the position, if not, return none
     if (shelf) {
