@@ -9,7 +9,7 @@ import {bindActionCreators} from 'redux'
 
 class ChangerControl extends Component {
   static propTypes = {
-    book: PropTypes.object.isRequired,
+    book: PropTypes.object.isRequired
   }
   constructor(props) {
     super(props);
@@ -25,25 +25,29 @@ class ChangerControl extends Component {
       .fetchUpdateBook(book, shelf)
   }
 
-  render() {
-    const {book} = this.props;
-
-    var setShelf;
-
-    // Check if there is a shelf value to set
-    // Only valid on Shelf component
-    if (book.shelf) {
-      // If exist, set the shelf with the value
-      setShelf = book.shelf;
+  checkShelf(books, book) {
+    // Check if the book exist inside the shelf
+    var shelf
+    books.map(function(item, i) {
+      if (item.id === book.id) {
+        shelf = item.shelf;
+      }
+    })
+    // If exist, return the position, if not, return none
+    if (shelf) {
+      return shelf
     } else {
-      // If not, set shelf none
-      setShelf = 'none';
+      return "none"
     }
+  }
 
-    // Run
+  render() {
+    
+    const {book} = this.props;
+    const {books} = this.props.shelf;
+    var setShelf = this.checkShelf(books, book)  
 
     return (<div className="book-shelf-changer">
-    { console.log( this.props.shelf )}
       <select defaultValue={setShelf} onChange={(event) => this.changeShelf(book, event.target.value)}>
         <option disabled="disabled">Move to...</option>
         <option value="currentlyReading">Currently Reading</option>
@@ -57,7 +61,7 @@ class ChangerControl extends Component {
 
 // Replicate all states to props
 function mapStateToProps(state) {
-  return {shelf: state.shelf, search: state.search}
+  return {search: state.search, shelf: state.shelf}
 }
 
 // Dispatch actions to props

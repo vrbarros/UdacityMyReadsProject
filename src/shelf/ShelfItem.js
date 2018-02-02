@@ -7,6 +7,7 @@ class ShelfItem extends Component {
     index: PropTypes.number.isRequired,
     book: PropTypes.object.isRequired,
   }
+
   render() {
 
     const {book, index} = this.props;
@@ -18,7 +19,7 @@ class ShelfItem extends Component {
             height: 193,
             backgroundImage: `url(${book.imageLinks.smallThumbnail})`
           }}></div>
-        <ChangerControl book={book}></ChangerControl>
+        <ChangerControl book={book} ></ChangerControl>
       </div>
       <div className="book-title">{book.title}</div>
       <div className="book-authors">{ (book.authors) ? book.authors[0] : '-' }</div>
